@@ -33,7 +33,7 @@ namespace rage
                 return;
             }
 
-            m_data = (T*)tlsContext::get()->m_allocator->Allocate(m_size * sizeof(T), 16, 0);
+            m_data = (T*)tlsContext::get()->getAllocator()->Allocate(m_size * sizeof(T), 16, 0);
             std::uninitialized_copy(right.m_data, right.m_data + right.m_count, m_data);
         }
 
@@ -52,7 +52,7 @@ namespace rage
 
             if (m_data)
             {
-                tlsContext::get()->m_allocator->Free(m_data);
+                tlsContext::get()->getAllocator()->Free(m_data);
 
                 m_data = nullptr;
             }
@@ -143,7 +143,7 @@ namespace rage
                 return;
             }
 
-            T* newOffset = (T*)tlsContext::get()->m_allocator->Allocate(newSize * sizeof(T), 16, 0);
+            T* newOffset = (T*)tlsContext::get()->getAllocator()->Allocate(newSize * sizeof(T), 16, 0);
 
 
             // initialize the new entries
@@ -153,7 +153,7 @@ namespace rage
             if (m_data)
             {
                 std::copy(m_data, m_data + m_size, newOffset);
-                tlsContext::get()->m_allocator->Free(m_data);
+                tlsContext::get()->getAllocator()->Free(m_data);
             }
 
             m_data = newOffset;

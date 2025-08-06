@@ -27,7 +27,9 @@ namespace rage
         float m_wait_timer;                  // 0x20
         char m_padding1[0x2C];               // 0x24
         std::uint32_t m_stack_size;          // 0x50
-        char m_padding2[0x54];               // 0x54
+        char m_padding2[0x10];               // 0x54
+        uint8_t m_call_depth;                // 0x64
+        std::uint32_t m_call_stack[16];      // 0x68
     };
     static_assert(sizeof(scrThreadContext) == 0xA8);
 }
